@@ -1,0 +1,151 @@
+
+
+    
+ 
+
+  <div [style.display]="role[0] == 0 ? 'block' : 'none'">
+    <div class="card">
+      <p-button [text]="true" [raised]="true" label="ახალი ჩანაწერი" (click)="navigateToregisterandlogin()"></p-button>
+
+      
+     <!--<select>
+        <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
+      </select>--> 
+    <p-table
+      #dt2
+      [value]="alluser"
+      dataKey="id"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [paginator]="true"
+      [globalFilterFields]="['id', 'firstname', 'lastname', 'number']"
+      [tableStyle]="{ 'min-width': '75rem' }"
+    >
+      <ng-template pTemplate="caption"></ng-template>
+    <ng-template pTemplate="header" >
+      <tr>
+        <th style="width:22%">ID</th>
+        <th style="width:22%">FIRSTNAME</th>
+        <th style="width:22%">LASTNAME</th>
+        <th style="width:22%">EMAIL</th>
+        <th style="width:22%">NUMBER</th>
+        <th style="width:22%">UPDATE</th>
+        <th style="width:22%">DELETE</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.userId }}</td>
+        <td>{{ user.nameEmployee }}</td>
+        <td>{{ user.lastEmployee }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td><p-button [text]="true" [raised]="true" label="განახლება" (click)="navigateUpdateToregisterandlogin(user.userId)"/></td>
+        <td><p-button [text]="true" [raised]="true" label="წაშლა"  (click)="deletefunct(user.userId)"/></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No users found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+  </div>
+
+  <!--manager table-->
+  <div [style.display]="role[0] == 1 ? 'block' : 'none'">
+    <div class="card">
+      <p-button [text]="true" [raised]="true" label="საწყობის დანატება" (click)="navigateToregisterstore()"/>
+      
+      
+    <p-table
+    #dt2
+    [value]="alluser"
+    dataKey="id"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true"
+    [globalFilterFields]="['id', 'firstname', 'lastname', 'number']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+  >
+    <ng-template pTemplate="caption"></ng-template> 
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:22%">managerID</th>
+        <th style="width:22%">storeadress</th>
+        <th style="width:22%">storename</th>
+        <th style="width:22%">UPDATE</th>
+        <th style="width:22%">DELETE</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.managerID }}</td>
+        <td>{{ user.storeadress }}</td>
+        <td>{{ user.storename }}</td>
+        <td><p-button [text]="true" [raised]="true" label="განახლება" (click)="navigateToGetmanagerstore(user.id)"/></td>
+        <td><p-button [text]="true" [raised]="true" label="წაშლა"  (click)="deletefunct(user.userId)"/></td>
+      </tr>
+    </ng-template>
+     
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No users found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+  </div>
+
+  <!--operator table-->
+<!-- Operator Table -->
+
+ 
+<div [style.display]="role[0] == 2 ? 'block' : 'none'">
+  <div class="card">
+   
+    
+    
+  <p-table
+  #dt2
+  [value]="alluser"
+  dataKey="id"
+  [rows]="10"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [paginator]="true"
+  [globalFilterFields]="['id', 'firstname', 'lastname', 'number']"
+  [tableStyle]="{ 'min-width': '75rem' }"
+>
+  <ng-template pTemplate="caption"></ng-template> 
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width:22%">operatorid</th>
+      <th style="width:22%">storeadress</th>
+      <th style="width:22%">storename</th>
+      <th style="width:22%">PRODUCT</th>
+     
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{ user.storeOperatorId }}</td>
+      <td>{{ user.storeadress }}</td>
+      <td>{{ user.storename }}</td>
+      <p-button [text]="true" [raised]="true" label="პროდუქტები" (click)="navigateToGetoperatorstore(user.id, operatorid)"/>
+
+      
+    </tr>
+  </ng-template>
+   
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="4">No users found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>
+</div>

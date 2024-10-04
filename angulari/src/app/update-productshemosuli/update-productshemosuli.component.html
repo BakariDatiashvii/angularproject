@@ -1,0 +1,30 @@
+<div class="update-product-container">
+    <form [formGroup]="updateProductForm" (ngSubmit)="onSubmit()">
+       
+        
+  
+      <div>
+        <label for="barcode">Barcode</label>
+        <input id="barcode" formControlName="barcode" type="text" />
+      </div>
+  
+      <div>
+        <label for="productName">Product Name</label>
+        <input id="productName" formControlName="productName" type="text" required />
+      </div>
+  
+      <div>
+        <label for="quantity">Quantity</label>
+        <input id="quantity" formControlName="quantity" type="number" required />
+      </div>
+  
+      <div>
+        <label for="dateOfEntry">Date of Entry</label>
+        <input id="dateOfEntry" formControlName="dateOfEntry" type="text" required />
+      </div>
+  
+      <div>
+        <button type="submit" [disabled]="updateProductForm.invalid">Update Product</button>
+      </div>
+    </form>
+</div>

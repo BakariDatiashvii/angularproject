@@ -1,0 +1,80 @@
+<div class="centerdiv">
+
+
+    <!-- (ngSubmit)="onSubmit()" -->
+    <div class="logincontcenter">
+      <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()" >
+        <div class="form-row">
+          <!-- Left Column -->
+          <div class="form-column" class="marginleft">
+
+            <label>UserId</label><br />
+            <input type="number" pInputText formControlName="UserId" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['UserId'].invalid" class="error">
+              LastName სავალდებულოა
+            </div>
+
+
+            <label>NameEmployee სახელი</label><br />
+            <input type="text" pInputText formControlName="NameEmployee" /><br />
+         
+            <div *ngIf="isSubmitted && registrationForm.controls['NameEmployee'].invalid" class="error">
+              მომხმარებლის სახელი სავალდებულოა
+            </div>
+  
+            <label>LastName</label><br />
+            <input type="text" pInputText formControlName="LastEmployee" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['LastEmployee'].invalid" class="error">
+              LastName სავალდებულოა
+            </div>
+  
+
+            <label>Email</label><br />
+            <input type="text" pInputText formControlName="Email" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['Email'].invalid" class="error">
+              CompanyName სავალდებულოა
+            </div>
+
+            <label>PhoneNumber</label><br />
+            <input type="text" pInputText formControlName="PhoneNumber" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['PhoneNumber'].invalid" class="error">
+              PhoneNumber სავალდებულოა
+            </div>
+  
+            
+          </div>
+  
+          <!-- Right Column
+          <div class="form-column" class="marginleft">
+            <label>ემაილი</label><br />
+            <input type="text" pInputText formControlName="Email" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['Email'].invalid" class="error">
+              ორგანიზაციის სახელი სავალდებულოა
+            </div>
+  
+            <label>ტელეფონის ნომერი</label><br />
+            <input type="text" pInputText formControlName="PhoneNumber" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['PhoneNumber'].invalid" class="error">
+              ორგანიზაციის მისამართი სავალდებულოა
+            </div>
+  
+            <label>კომპანი იდი</label><br />
+            <input type="number" pInputText formControlName="companyid" /><br />
+  
+            <label>საწყობის ადი</label><br />
+            <input type="number" pInputText formControlName="sawyobiID" /><br />
+            <label>როლი</label><br />
+            <label for="role">Select Role</label>
+            <select id="role" formControlName="role" >
+              <option value="" disabled>Select Role</option>
+              <option  [ngValue]="1">m</option>
+              <option  [ngValue]="2">o</option>
+            </select>
+            <input type="number" pInputText /><br />
+          </div> -->
+        </div>
+        <p-button label="რეგისტრაცია" class="loginbutton12 buttonsize" type="submit" ></p-button>
+  
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,21 @@
+<div class="centerdiv">
+  <div class="card padding" style="margin-bottom: 30px;">
+
+    <div class="whitebackground">
+      <p-button [text]="true" [raised]="true" label="ავტორიზაცია" />
+    </div>
+
+    <p-button [text]="true" [raised]="true" label="რეგისტრაცია" class="marginleft" (click)="navigateToLogin()" />
+  </div>
+
+  <div class="logincontcenter">
+    <form [formGroup]="authorizationForm" (ngSubmit)="onSubmit()">
+    <label style="margin-bottom: 10px;" pInputText  >მომხმარებლის სახელი</label><br />
+    <input type="text" style="margin-bottom: 20px;" pInputText formControlName="Username"/><br />
+    <label style="margin-bottom: 10px;">პაროლი</label><br />
+    <input type="password" pInputText formControlName="Password" />
+
+    <p-button label="შესვლა" class="loginbutton12 buttonsize" type="submit"  />
+    </form>
+  </div>
+</div>

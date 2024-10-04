@@ -1,0 +1,29 @@
+.store-details-header {
+    font-size: 24px; /* Adjust size as needed */
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007ad9; /* PrimeNG theme color */
+    padding-bottom: 5px;
+}
+
+.store-detail {
+    margin: 20px 0; /* Space below store details */
+    padding: 10px;
+    border: 1px solid #e0e0e0; /* Light border around details */
+    border-radius: 4px; /* Rounded corners */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space items evenly */
+}
+
+.store-info {
+    display: flex; /* Horizontal layout */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.table-header {
+    font-size: 20px; /* Adjust size as needed */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333; /* Adjust color as needed */
+}

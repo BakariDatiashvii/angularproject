@@ -1,0 +1,39 @@
+.update-product-container {
+    max-width: 400px; /* Limit the width of the form */
+    margin: auto; /* Center the form */
+    padding: 20px; /* Add padding */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Round the corners */
+    background-color: #f9f9f9; /* Light background color */
+  }
+  
+  .update-product-container div {
+    margin-bottom: 15px; /* Add spacing between input fields */
+  }
+  
+  label {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Add space below labels */
+  }
+  
+  input {
+    width: 100%; /* Full width inputs */
+    padding: 8px; /* Padding for inputs */
+    box-sizing: border-box; /* Include padding in total width */
+  }
+  
+  button {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding for button */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Round corners */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  button:disabled {
+    background-color: #cccccc; /* Disabled button color */
+    cursor: not-allowed; /* Not allowed cursor */
+  }
+  

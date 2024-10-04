@@ -1,0 +1,28 @@
+<div class="centerdiv">
+
+
+
+    <div class="logincontcenter">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <!-- Left Column -->
+          <div class="form-column" class="marginleft">
+            <label>storename</label><br />
+            <input type="text" pInputText formControlName="storename" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['storename'].invalid" class="error">
+                საწყობის ადი სავალდებულოა
+            </div>
+  
+            <label>საწყობის მისამართი</label><br />
+            <input type="text" pInputText formControlName="storeadress" /><br />
+            <div *ngIf="isSubmitted && registrationForm.controls['storeadress'].invalid" class="error">
+                საწყობის მისამართი სავალდებულოა
+            </div>
+            <!-- <input type="number" pInputText formControlName="managerID" /><br /> -->
+        </div>
+    </div>
+  
+        <p-button label="რეგისტრაცია" class="loginbutton12 buttonsize" type="submit"></p-button>
+      </form>
+    </div>
+  </div>

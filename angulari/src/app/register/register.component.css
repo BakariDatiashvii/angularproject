@@ -1,0 +1,94 @@
+.error {
+    color: red;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  
+  .centerdiv {
+    width: 1000px;
+    margin: 100px auto;
+    border-radius: 10px;
+  }
+  
+  .padding {
+    padding: 30px 182px;
+  }
+  
+  ::ng-deep .card .p-button {
+    width: 305px;
+    height: 40px;
+  }
+  
+  .card {
+    border-radius: 10px 10px 0 0;
+    background-color: #EFF5FF;
+  }
+  
+  .marginleft {
+    margin-left: 25px;
+  }
+  
+  ::ng-deep .whitebackground {
+    display: inline-block;
+  }
+  
+  ::ng-deep .whitebackground .p-button {
+    background-color: #FFFFFF;
+  }
+  
+   .logincontcenter {
+    margin: 0 auto;
+    width: 680px;
+  }
+  
+  .logincontcenter input {
+    width: 300px;
+    height: 40px;
+  }
+  
+  .logincontcenter label {
+    color: #4474BD;
+    font-size: 14px;
+  }
+  
+  ::ng-deep .loginbutton12 {
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  ::ng-deep .logincontcenter .p-button {
+    width: 620px;
+    height: 40px;
+  }
+  
+  .form-row {
+    display: flex;
+    position: relative;
+  }
+  
+.form-column-left {
+    position: absolute;
+    top: 257px;
+    left: 100px;
+    width: 300px;
+  }
+  
+ .form-column-right {
+    position: absolute;
+    top: 257px;
+    left: 980px;
+    width: 300px;
+  }
+  
+  .form-column label {
+    margin-bottom: 10px;
+    display: block;
+    color: #4474BD;
+  }
+  
+  .form-column input {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+  
