@@ -6,6 +6,7 @@ import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import axios from "axios"
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-register-menegerandoperator',
@@ -77,7 +78,7 @@ export class RegisterMenegerandoperatorComponent implements OnInit {
     if (this.registrationForm.valid) {
       // Call the service to register the organization
       console.log('Registration successful', this.registrationForm.value);
-      await axios.post("http://localhost:5133/api/Employee/register-managerandoperator", this.registrationForm.value)
+      await axios.post(`${environment.registermanagerandoperatorUrl}`, this.registrationForm.value)
         .then((x) => {
           console.log(x.data);
         })

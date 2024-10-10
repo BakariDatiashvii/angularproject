@@ -1,85 +1,82 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { environment } from '../environment';
+import { FormsModule } from '@angular/forms';
+
+interface Product {
+  ProductId: number;
+  productName: string;
+  barcode: string;
+  quantity: number;
+  dateOfEntry: string;
+}
 
 @Component({
   selector: 'app-update-productshemosuli',
   standalone: true,
-  imports: [
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, HttpClientModule, TableModule, InputTextModule, FormsModule],
   templateUrl: './update-productshemosuli.component.html',
   styleUrls: ['./update-productshemosuli.component.css']
 })
 export class UpdateProductshemosuliComponent implements OnInit {
-  updateProductForm: FormGroup;
-  ID : number | undefined;
-  private apiUrl = 'http://localhost:5133/api/Employee/update-product';
+  storeProductData: any; // Store product data fetched from API
+  id: number | undefined; // Store ID fetched from route parameter
 
+  // Form fields
+  productName: string = '';
+  barcode: string = '';
+  quantity: number | undefined;
+  dateOfEntry: string = '';
 
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
     private http: HttpClient,
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef,
     private router: Router
-  ) {
-    this.updateProductForm = this.fb.group({
-      productId: [0],
-      barcode: [''],
-      productName: ['', Validators.required],
-      quantity: [null, [Validators.required, Validators.min(1)]],
-      dateOfEntry: ['', Validators.required]
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-  
-    this.ID = Number(this.route.snapshot.paramMap.get('id'));
+    // Get store ID from route parameters
+    const id = this.route.snapshot.paramMap.get('id');
+    this.id = id ? Number(id) : undefined;
+
     
+    console.log('Store ID:', this.id); // For debugging
   }
 
-  loadProductDetails(id: number) {
-    this.http.get<any>(`${this.apiUrl}/${id}`).subscribe(
-      product => {
-        if (product) {
-          this.updateProductForm.patchValue({
-            productId: this.ID,
-            barcode: product.barcode,
-            productName: product.productName,
-            quantity: product.quantity,
-            dateOfEntry: product.dateOfEntry
-          });
-        } else {
-          console.error('No product data available for ID:', id);
-          alert('No product data available for the given ID');
-          this.router.navigate(['/products']);
-        }
-      },
-      error => {
-        console.error('Error fetching product details', error);
-        alert('Could not load product details');
-        this.router.navigate(['/products']);
-      }
-    );
-  }
+  addProduct(): void {
+    if (this.id) {
+      const productData: Product = {
+        ProductId: this.id,
+        productName: this.productName,
+        barcode: this.barcode,
+        quantity: this.quantity ?? 0, // Default to 0 if undefined
+        dateOfEntry: this.dateOfEntry
+      };
 
-  onSubmit() {
-    if (this.updateProductForm.valid) {
-      const updateProductData = this.updateProductForm.value;
-      this.http.put(this.apiUrl, updateProductData).subscribe(
-        response => {
-          alert('Product updated successfully!');
-          this.router.navigate(['/products']);
+      this.http.put(`${environment.updateproductsemosUrl}`, productData).subscribe(
+        (response) => {
+          console.log('Product added successfully', response);
+          this.resetForm();
+          this.router.navigate(['/product-success']); // Ensure this route is defined
         },
-        error => {
-          console.error('Error updating product', error);
-          alert('Product update failed');
+        (error) => {
+          console.error('Failed to add product', error);
         }
       );
     } else {
-      alert('Please fill in the required fields');
+      console.error('Store ID is missing for adding a product.');
     }
+  }
+
+  resetForm() {
+    this.productName = '';
+    this.barcode = '';
+    this.quantity = undefined;
+    this.dateOfEntry = '';
   }
 }

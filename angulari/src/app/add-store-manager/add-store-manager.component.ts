@@ -6,6 +6,7 @@ import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import axios from "axios"
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-add-store-manager',
@@ -49,7 +50,7 @@ export class AddStoreManagerComponent {
     if (this.registrationForm.valid) {
       // Call the service to register the organization
       console.log('Registration successful', this.registrationForm.value);
-      await axios.post("http://localhost:5133/api/Employee/add-store",this.registrationForm.value).then((x)=>{
+      await axios.post(`${environment.addstoreapiUrl}/add-store`,this.registrationForm.value).then((x)=>{
         // this.router.navigate(['/']);
         console.log(x.data);
         

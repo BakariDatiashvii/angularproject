@@ -6,6 +6,7 @@ import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import axios from "axios"
+import { environment } from '../environment';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -43,7 +44,7 @@ export class RegisterComponent {
     if (this.registrationForm.valid) {
       // Call the service to register the organization
       console.log('Registration successful', this.registrationForm.value);
-      await axios.post("http://localhost:5133/api/Employee/create",this.registrationForm.value).then(()=>{
+      await axios.post(`${environment.registeradminbycompanyUrl}`,this.registrationForm.value).then(()=>{
         this.router.navigate(['/']);
       })
       // Perform your backend call here to save the organization

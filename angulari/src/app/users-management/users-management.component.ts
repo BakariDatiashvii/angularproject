@@ -138,6 +138,11 @@ export class UsersManagementComponent implements OnInit {
 }
 
 
+navigateToaddoperatorproduct(id: number, storeOperatorId: number) {
+  this.router.navigate([`/addproductoperator/${id}/${storeOperatorId}`]);
+}
+
+
 
  navigateToregisterstore(){
   this.router.navigate(['/registerupdatemanagerstore']);

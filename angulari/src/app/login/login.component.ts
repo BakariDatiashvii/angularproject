@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
 import axios from 'axios';
 import * as jwt_decode from 'jwt-decode';
+import { environment } from '../environment';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class LoginComponent {
 
     // if (this.authorizationForm.valid) {
       // console.log('Registration successful', this.authorizationForm.value);
-      await axios.post("http://localhost:5133/api/Employee/login",this.authorizationForm.value).then((x) => {
+      await axios.post(`${environment.loginUrl}`,this.authorizationForm.value).then((x) => {
         console.log(x.data);
 
         const token = x.data.token;

@@ -54,10 +54,14 @@
 </div>
   </div>
 
+
+
   <!--manager table-->
+ 
+  <p-button [text]="true" [raised]="true" label="საწყობის დანატება" (click)="navigateToregisterstore()"/> 
   <div [style.display]="role[0] == 1 ? 'block' : 'none'">
     <div class="card">
-      <p-button [text]="true" [raised]="true" label="საწყობის დანატება" (click)="navigateToregisterstore()"/>
+     <!-- <p-button [text]="true" [raised]="true" label="საწყობის დანატება" (click)="navigateToregisterstore()"/> არ ჩანს ეს ველი როცა არ არის საწყობი მენეჯერის გარდა ვერავინ ამატებს-->
       
       
     <p-table
@@ -77,7 +81,7 @@
         <th style="width:22%">storeadress</th>
         <th style="width:22%">storename</th>
         <th style="width:22%">UPDATE</th>
-        <th style="width:22%">DELETE</th>
+    
       </tr>
     </ng-template>
 
@@ -86,8 +90,8 @@
         <td>{{ user.managerID }}</td>
         <td>{{ user.storeadress }}</td>
         <td>{{ user.storename }}</td>
-        <td><p-button [text]="true" [raised]="true" label="განახლება" (click)="navigateToGetmanagerstore(user.id)"/></td>
-        <td><p-button [text]="true" [raised]="true" label="წაშლა"  (click)="deletefunct(user.userId)"/></td>
+        <td><p-button [text]="true" [raised]="true" label="პროდუქტების ნახვა" (click)="navigateToGetmanagerstore(user.id)"/></td>
+        
       </tr>
     </ng-template>
      
@@ -125,6 +129,7 @@
       <th style="width:22%">operatorid</th>
       <th style="width:22%">storeadress</th>
       <th style="width:22%">storename</th>
+      <th style="width:22%">ADD PRODUCT</th>
       <th style="width:22%">PRODUCT</th>
      
     </tr>
@@ -135,7 +140,10 @@
       <td>{{ user.storeOperatorId }}</td>
       <td>{{ user.storeadress }}</td>
       <td>{{ user.storename }}</td>
-      <p-button [text]="true" [raised]="true" label="პროდუქტები" (click)="navigateToGetoperatorstore(user.id, operatorid)"/>
+      <td><p-button [text]="true" [raised]="true" label="პროდუქტის დამატება" (click)="navigateToaddoperatorproduct(user.id, operatorid)"/></td>
+      <td><p-button [text]="true" [raised]="true" label="პროდუქტები" (click)="navigateToGetoperatorstore(user.id, operatorid)"/></td>
+      
+      
 
       
     </tr>

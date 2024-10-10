@@ -9,6 +9,8 @@ import { AddStoreManagerComponent } from './add-store-manager/add-store-manager.
 import { GetManagerStoreproductComponent } from './get-manager-storeproduct/get-manager-storeproduct.component';
 import { GetOperatorStoreproductComponent } from './get-operator-storeproduct/get-operator-storeproduct.component';
 import { UpdateProductshemosuliComponent } from './update-productshemosuli/update-productshemosuli.component';
+import { AddOperatorProductComponent } from './add-operator-product/add-operator-product.component';
+import { UpdateProductgayiduliComponent } from './update-productgayiduli/update-productgayiduli.component';
 
 
 export const routes: Routes = [
@@ -40,9 +42,16 @@ export const routes: Routes = [
     },
     {
         path: "shemosuliproductstore/:id", component: UpdateProductshemosuliComponent
+    },
+    {
+        path: "addproductoperator/:id/:storeOperatorId", component: AddOperatorProductComponent
+    },
+    {
+        path: "sellproductstore/:id", component: UpdateProductgayiduliComponent
     }
-   
     
    
+
+    
     
 ];

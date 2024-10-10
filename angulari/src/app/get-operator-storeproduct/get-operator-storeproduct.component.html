@@ -2,83 +2,144 @@
     <h2 class="store-details-header">Store Details</h2>
     
     <div class="store-detail">
-        <div class="store-info">
-            <p><strong>ID:</strong> {{ storeProductData.id }}</p>
-            
-            <p><strong>Store Name:</strong> {{ storeProductData.storename }}</p>
-            <p><strong>Store Address:</strong> {{ storeProductData.storeadress }}</p>
-        </div>
+      <div class="store-info">
+        <p><strong>ID:</strong> {{ storeProductData.id }}</p>
+        <p><strong>Store Name:</strong> {{ storeProductData.storename }}</p>
+        <p><strong>Store Address:</strong> {{ storeProductData.storeadress }}</p>
+      </div>
     </div>
   
-    <h3 class="table-header">შემოსული პროდუქტები</h3>
-    <p-table [value]="storeProductData.getproductDtos" tableStyleClass="p-datatable-gridlines">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>ID</th>
-                <th>Barcode</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Date Of Entry</th>
-                <th>UPDATE</th>
-
-            </tr>
+    <!-- Products Table -->
+    <h3 class="table-header">Products in Store</h3>
+    <div class="card">
+      <p-table #dtProducts [value]="storeProductData.getproductDtos" dataKey="id" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <p-iconField iconPosition="left" class="ml-auto">
+              <p-inputIcon>
+                <i class="pi pi-search"></i>
+              </p-inputIcon>
+              <input pInputText type="text" (input)="dtProducts.filterGlobal($event.target.value, 'contains')" placeholder="Search Products" />
+            </p-iconField>
+          </div>
         </ng-template>
+  
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Barcode</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Date Of Entry</th>
+            <th>Update</th>
+          </tr>
+        </ng-template>
+  
         <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.barcode }}</td>
-                <td>{{ product.productName }}</td>
-                <td>{{ product.quantity }}</td>
-                <td>{{ product.dateOfEntry }}</td>
-                <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproduct(product.id)" >განახლება</button></td>
-            </tr>
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.barcode }}</td>
+            <td>{{ product.productName }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.dateOfEntry }}</td>
+            <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproduct(product.id)" >განახლება</button></td>
+          </tr>
         </ng-template>
-    </p-table>
-
-    <h3 class="table-header">გაყიდული პროდუქტები</h3>
-    <p-table [value]="storeProductData.getproductSellDtos" tableStyleClass="p-datatable-gridlines">
+  
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5">No products found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  
+    <!-- Sold Products Table -->
+    <h3 class="table-header">Products Sold</h3>
+    <div class="card">
+      <p-table #dtSoldProducts [value]="storeProductData.getproductSellDtos" dataKey="id" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <p-iconField iconPosition="left" class="ml-auto">
+              <p-inputIcon>
+                <i class="pi pi-search"></i>
+              </p-inputIcon>
+              <input pInputText type="text" (input)="dtSoldProducts.filterGlobal($event.target.value, 'contains')" placeholder="Search Sold Products" />
+            </p-iconField>
+          </div>
+        </ng-template>
+  
         <ng-template pTemplate="header">
-            <tr>
-                <th>ID</th>
-                <th>Barcode</th>
-                <th>Product Name</th>
-                <th>Sold Quantity</th>
-                <th>UPDATE</th>
-            </tr>
+          <tr>
+            <th>ID</th>
+            <th>Barcode</th>
+            <th>Product Name</th>
+            <th>Sold Quantity</th>
+            <th>Update</th>
+          </tr>
         </ng-template>
+  
         <ng-template pTemplate="body" let-sell>
-            <tr>
-                <td>{{ sell.id }}</td>
-                <td>{{ sell.barcode }}</td>
-                <td>{{ sell.productName }}</td>
-                <td>{{ sell.quantity }}</td>
-                <td><button label="ახალი ჩანაწერი" >გაყიდვა</button></td>
-            </tr>
+          <tr>
+            <td>{{ sell.id }}</td>
+            <td>{{ sell.barcode }}</td>
+            <td>{{ sell.productName }}</td>
+            <td>{{ sell.quantity }}</td>
+            <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproductsell(sell.id)" >განახლება</button></td>
+          </tr>
         </ng-template>
-    </p-table>
-
-    <h3 class="table-header">პროდუქტის ნაშთი</h3>
-    <p-table [value]="storeProductData.getproductdtNashtiDtos" tableStyleClass="p-datatable-gridlines">
+  
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">No sold products found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  
+    <!-- Remaining Stock (Nashti) Table -->
+    <h3 class="table-header">Remaining Stock (Nashti)</h3>
+    <div class="card">
+      <p-table #dtNashtiProducts [value]="storeProductData.getproductdtNashtiDtos" dataKey="id" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }">
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <p-iconField iconPosition="left" class="ml-auto">
+              <p-inputIcon>
+                <i class="pi pi-search"></i>
+              </p-inputIcon>
+              <input pInputText type="text" (input)="dtNashtiProducts.filterGlobal($event.target.value, 'contains')" placeholder="Search Remaining Stock" />
+            </p-iconField>
+          </div>
+        </ng-template>
+  
         <ng-template pTemplate="header">
-            <tr>
-                <th>ID</th>
-                <th>Barcode</th>
-                <th>Product Name</th>
-                <th>Remaining Quantity (Nashti)</th>
-            </tr>
+          <tr>
+            <th>ID</th>
+            <th>Barcode</th>
+            <th>Product Name</th>
+            <th>Remaining Quantity (Nashti)</th>
+          </tr>
         </ng-template>
+  
         <ng-template pTemplate="body" let-nashti>
-            <tr>
-                <td>{{ nashti.id }}</td>
-                <td>{{ nashti.barcode }}</td>
-                <td>{{ nashti.productName }}</td>
-                <td>{{ nashti.nashti }}</td>
-            </tr>
+          <tr>
+            <td>{{ nashti.id }}</td>
+            <td>{{ nashti.barcode }}</td>
+            <td>{{ nashti.productName }}</td>
+            <td>{{ nashti.nashti }}</td>
+          </tr>
         </ng-template>
-    </p-table>
-</div>
-
-<div *ngIf="!storeProductData">
+  
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">No remaining stock found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  
+  <div *ngIf="!storeProductData">
     <p>No store product data available.</p>
-</div>
-
+  </div>
+  

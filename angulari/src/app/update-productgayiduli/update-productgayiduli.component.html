@@ -1,1 +1,33 @@
-<p>update-productgayiduli works!</p>
+<div class="product-form-container">
+    <h2>Add Product</h2>
+    <form (ngSubmit)="addProduct()">
+      <div class="form-group">
+        <label for="productName">Product Name:</label>
+        <input id="productName" type="text" pInputText [(ngModel)]="productName" name="productName" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="barcode">Barcode:</label>
+        <input id="barcode" type="text" pInputText [(ngModel)]="barcode" name="barcode" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input id="quantity" type="number" pInputText [(ngModel)]="quantity" name="quantity" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="dateOfEntry">Date of Entry:</label>
+        <input id="dateOfEntry" type="text" pInputText [(ngModel)]="dateOfEntry" name="dateOfEntry" required />
+      </div>
+  
+      <div class="form-group">
+        <button type="submit" pButton label="Add Product" class="p-button-success">damateba</button>
+      </div>
+    </form>
+  
+    <p *ngIf="!id" class="error-message">
+      Store ID or Store Operator ID is missing. Cannot add a product.
+    </p>
+  </div>
+  

@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Import HttpClientModule
 import { Observable } from 'rxjs';
 import axios from 'axios';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-updage-register-managerandoperator',
@@ -26,8 +27,8 @@ import axios from 'axios';
 })
 export class UpdageRegisterManagerandoperatorComponent {
   
-  private apiUrl = 'http://localhost:5133/api/Employee/get-user-by-id';
-  private apiUrlmanager = 'http://localhost:5133/api/Employee/get-all-stores';
+  //private apiUrl = 'http://localhost:5133/api/Employee/get-user-by-id';
+  //private apiUrlmanager = 'http://localhost:5133/api/Employee/get-all-stores';
 
   registrationForm: FormGroup;
   isSubmitted = false;
@@ -98,7 +99,7 @@ export class UpdageRegisterManagerandoperatorComponent {
       let tt = this.registrationForm.value
       console.log(tt);
       
-      await axios.post("http://localhost:5133/api/Employee/update-user",tt).then((x)=>{
+      await axios.post(`${environment.updateusermanagerandoperatorUrl}`,tt).then((x)=>{
         // this.router.navigate(['/']);
         console.log(x.data);
         
@@ -110,11 +111,11 @@ export class UpdageRegisterManagerandoperatorComponent {
  }
 
   getAllUsers(userId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?userId=${userId}`);
+    return this.http.get<any>(`${environment.getuserbyidUrl}?userId=${userId}`);
   }
 
   getManager(managerID: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlmanager}/${managerID}`);
+    return this.http.get<any>(`${environment.getallstoresUrl}/${managerID}`);
   }
 
   onRoleChange(event: any) {
