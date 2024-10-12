@@ -9,6 +9,7 @@
         </div>
     </div>
 
+    <!-- Products Table -->
     <h3 class="table-header">Products in Store</h3>
     <div class="card">
         <p-table 
@@ -23,18 +24,19 @@
         >
             <ng-template pTemplate="caption">
                 <div class="flex">
-                    <p-iconField iconPosition="left" class="ml-auto">
-                        <p-inputIcon>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
                             <i class="pi pi-search"></i>
-                        </p-inputIcon>
+                        </span>
                         <input 
                             pInputText 
                             type="text" 
-                            (input)="dtProducts.filterGlobal($event.target.value, 'contains')" 
+                            (input)="dtProducts.filterGlobal(($event.target as HTMLInputElement)?.value, 'contains')" 
                             placeholder="Search Products" />
-                    </p-iconField>
+                    </div>
                 </div>
             </ng-template>
+
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID</th>
@@ -43,24 +45,8 @@
                     <th>Quantity</th>
                     <th>Date Of Entry</th>
                 </tr>
-                <tr>
-                    <th>
-                        <p-columnFilter type="text" field="id" placeholder="Filter by ID"></p-columnFilter>
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="barcode" placeholder="Filter by Barcode"></p-columnFilter>
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="productName" placeholder="Filter by Product Name"></p-columnFilter>
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="quantity" placeholder="Filter by Quantity"></p-columnFilter>
-                    </th>
-                    <th>
-                        <p-columnFilter type="text" field="dateOfEntry" placeholder="Filter by Date"></p-columnFilter>
-                    </th>
-                </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-product>
                 <tr>
                     <td>{{ product.id }}</td>
@@ -70,6 +56,7 @@
                     <td>{{ product.dateOfEntry }}</td>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="emptymessage">
                 <tr>
                     <td colspan="5">No products found.</td>
@@ -78,6 +65,7 @@
         </p-table>
     </div>
 
+    <!-- Sold Products Table -->
     <h3 class="table-header">Products Sold</h3>
     <div class="card">
         <p-table 
@@ -92,18 +80,19 @@
         >
             <ng-template pTemplate="caption">
                 <div class="flex">
-                    <p-iconField iconPosition="left" class="ml-auto">
-                        <p-inputIcon>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
                             <i class="pi pi-search"></i>
-                        </p-inputIcon>
+                        </span>
                         <input 
                             pInputText 
                             type="text" 
-                            (input)="dtSoldProducts.filterGlobal($event.target.value, 'contains')" 
+                            (input)="dtSoldProducts.filterGlobal(($event.target as HTMLInputElement)?.value, 'contains')" 
                             placeholder="Search Sold Products" />
-                    </p-iconField>
+                    </div>
                 </div>
             </ng-template>
+
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID</th>
@@ -112,6 +101,7 @@
                     <th>Sold Quantity</th>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-sell>
                 <tr>
                     <td>{{ sell.id }}</td>
@@ -120,6 +110,7 @@
                     <td>{{ sell.quantity }}</td>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="emptymessage">
                 <tr>
                     <td colspan="4">No sold products found.</td>
@@ -128,6 +119,7 @@
         </p-table>
     </div>
 
+    <!-- Remaining Stock (Nashti) Table -->
     <h3 class="table-header">Remaining Stock (Nashti)</h3>
     <div class="card">
         <p-table 
@@ -142,18 +134,19 @@
         >
             <ng-template pTemplate="caption">
                 <div class="flex">
-                    <p-iconField iconPosition="left" class="ml-auto">
-                        <p-inputIcon>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
                             <i class="pi pi-search"></i>
-                        </p-inputIcon>
+                        </span>
                         <input 
                             pInputText 
                             type="text" 
-                            (input)="dtNashtiProducts.filterGlobal($event.target.value, 'contains')" 
+                            (input)="dtNashtiProducts.filterGlobal(($event.target as HTMLInputElement)?.value, 'contains')" 
                             placeholder="Search Remaining Stock" />
-                    </p-iconField>
+                    </div>
                 </div>
             </ng-template>
+
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID</th>
@@ -162,6 +155,7 @@
                     <th>Remaining Quantity (Nashti)</th>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-nashti>
                 <tr>
                     <td>{{ nashti.id }}</td>
@@ -170,6 +164,7 @@
                     <td>{{ nashti.nashti }}</td>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="emptymessage">
                 <tr>
                     <td colspan="4">No remaining stock found.</td>

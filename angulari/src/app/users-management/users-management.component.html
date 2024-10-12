@@ -1,6 +1,13 @@
 
 
+    <!-- header.component.html -->
+    <nav>
+      <!-- Other header content -->
     
+      <button pButton type="button" label="Logout" icon="pi pi-power-off" class="p-button-danger" (click)="logout()"></button>
+    </nav>
+    
+
  
 
   <div [style.display]="role[0] == 0 ? 'block' : 'none'">
@@ -57,7 +64,7 @@
 
 
   <!--manager table-->
- 
+  <p-button [text]="true" [raised]="true" label="testi" (click)="test()"/> 
   <p-button [text]="true" [raised]="true" label="საწყობის დანატება" (click)="navigateToregisterstore()"/> 
   <div [style.display]="role[0] == 1 ? 'block' : 'none'">
     <div class="card">

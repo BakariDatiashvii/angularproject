@@ -148,12 +148,32 @@ navigateToaddoperatorproduct(id: number, storeOperatorId: number) {
   this.router.navigate(['/registerupdatemanagerstore']);
  }
 
+
+ test(){
+  this.router.navigate(['/testi']);
+ }
+
+
  navigateToGetmanagerstore(id: number){
   this.router.navigate([`/navigateToGetmanagerstorepr/${id}`])
   console.log(id)
  }
+ logout(): void {
+  console.log('Logout initiated'); 
 
+  // Remove token or any user-related information from local storage
+  localStorage.removeItem('token');
   
+  // Optional: Clear session storage if used
+  sessionStorage.clear();
+
+  // Confirm token is removed
+  console.log('Token after clearing:', localStorage.getItem('token')); 
+
+ 
+  this.router.navigate(['/']);
 }
+  
+}     
 
 

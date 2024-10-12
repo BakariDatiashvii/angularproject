@@ -1,3 +1,27 @@
+nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+button.p-button {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 25px;
+}
+
+button.p-button-danger {
+  background-color: #ff4d4f;
+  border: none;
+}
+
+button.p-button-danger:hover {
+  background-color: #ff7875;
+}
+
+
 .centerdiv {
     width: 1000px;
     margin: 100px auto;
