@@ -11,7 +11,7 @@ import { GetOperatorStoreproductComponent } from './get-operator-storeproduct/ge
 import { UpdateProductshemosuliComponent } from './update-productshemosuli/update-productshemosuli.component';
 import { AddOperatorProductComponent } from './add-operator-product/add-operator-product.component';
 import { UpdateProductgayiduliComponent } from './update-productgayiduli/update-productgayiduli.component';
-import { GetManagerebiProductstableComponent } from './get-managerebi-productstable/get-managerebi-productstable.component';
+
 
 
 export const routes: Routes = [
@@ -50,9 +50,7 @@ export const routes: Routes = [
     {
         path: "sellproductstore/:id", component: UpdateProductgayiduliComponent
     },
-    {
-        path: "testi",component: GetManagerebiProductstableComponent
-    }
+   
     
    
 

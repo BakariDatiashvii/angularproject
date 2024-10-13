@@ -149,9 +149,7 @@ navigateToaddoperatorproduct(id: number, storeOperatorId: number) {
  }
 
 
- test(){
-  this.router.navigate(['/testi']);
- }
+ 
 
 
  navigateToGetmanagerstore(id: number){
