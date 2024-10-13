@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { UsersManagementComponent } from './users-management/users-management.component';
 import { RegisterComponent } from './register/register.component';
-import { UserManagmentRegisterComponent } from './user-managment-register/user-managment-register.component';
+
 import { RegisterMenegerandoperatorComponent } from './register-menegerandoperator/register-menegerandoperator.component';
 import { UpdageRegisterManagerandoperatorComponent } from './updage-register-managerandoperator/updage-register-managerandoperator.component';
 import { AddStoreManagerComponent } from './add-store-manager/add-store-manager.component';
