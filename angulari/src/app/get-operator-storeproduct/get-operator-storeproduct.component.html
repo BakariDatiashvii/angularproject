@@ -15,10 +15,12 @@
     <p-table #dtProducts [value]="storeProductData.getproductDtos" dataKey="id" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }">
       <ng-template pTemplate="caption">
         <div class="flex">
-          <p-inputIcon>
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="dtProducts.filterGlobal($event.target.value, 'contains')" placeholder="Search Products" />
-          </p-inputIcon>
+          <p-iconField iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+           
+          </p-iconField>
         </div>
       </ng-template>
 
@@ -40,13 +42,13 @@
           <td>{{ product.productName }}</td>
           <td>{{ product.quantity }}</td>
           <td>{{ product.dateOfEntry }}</td>
-          <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproduct(product.id)">განახლება</button></td>
+          <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproduct(product.id)" >განახლება</button></td>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6">No products found.</td>
+          <td colspan="5">No products found.</td>
         </tr>
       </ng-template>
     </p-table>
@@ -58,10 +60,12 @@
     <p-table #dtSoldProducts [value]="storeProductData.getproductSellDtos" dataKey="id" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }">
       <ng-template pTemplate="caption">
         <div class="flex">
-          <p-inputIcon>
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="dtSoldProducts.filterGlobal($event.target.value, 'contains')" placeholder="Search Sold Products" />
-          </p-inputIcon>
+          <p-iconField iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+            
+          </p-iconField>
         </div>
       </ng-template>
 
@@ -81,13 +85,13 @@
           <td>{{ sell.barcode }}</td>
           <td>{{ sell.productName }}</td>
           <td>{{ sell.quantity }}</td>
-          <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproductsell(sell.id)">განახლება</button></td>
+          <td><button label="ახალი ჩანაწერი" (click)="navigateTupdateproductsell(sell.id)" >განახლება</button></td>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5">No sold products found.</td>
+          <td colspan="4">No sold products found.</td>
         </tr>
       </ng-template>
     </p-table>
@@ -99,10 +103,12 @@
     <p-table #dtNashtiProducts [value]="storeProductData.getproductdtNashtiDtos" dataKey="id" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }">
       <ng-template pTemplate="caption">
         <div class="flex">
-          <p-inputIcon>
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="dtNashtiProducts.filterGlobal($event.target.value, 'contains')" placeholder="Search Remaining Stock" />
-          </p-inputIcon>
+          <p-iconField iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+            
+          </p-iconField>
         </div>
       </ng-template>
 
