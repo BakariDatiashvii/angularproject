@@ -7,6 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import axios from "axios"
 import { environment } from '../environment';
+import { DataServiceService } from "../data-servise"
+
 
 @Component({
   selector: 'app-register-menegerandoperator',
@@ -31,7 +33,7 @@ export class RegisterMenegerandoperatorComponent implements OnInit {
   registrationForm: FormGroup;
   isSubmitted = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder,private dataService: DataServiceService, private router: Router) {
     this.registrationForm = this.fb.group({
       UserName: ['', Validators.required],
       Password: ['', Validators.required],
@@ -46,18 +48,17 @@ export class RegisterMenegerandoperatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get("http://localhost:5133/api/Employee/carielisawyobebi-operatorisregistraciistvis")
-      .then((x) => {
+
+    this.dataService.getcarielistorebyoperator(this.registrationForm.value).subscribe(
+      (x: any) => {
         // Assign the fetched data to alluser
-        this.alluser = x.data;
+        this.alluser = x;
 
         let roleData = localStorage.getItem("role");
         if (roleData) {
           let t = JSON.parse(roleData);
-          this.compid =t.CompanyID
-          
-          console.log(this.compid );
-          
+          this.compid = t.CompanyID;
+          console.log(this.compid);
         }
 
         // Apply map() to transform the data if needed
@@ -67,26 +68,29 @@ export class RegisterMenegerandoperatorComponent implements OnInit {
         }));
 
         console.log(this.transformedUsers);  // Log the transformed data
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error('Error fetching data:', error);
-      });
+      }
+    )
   }
 
   async onSubmit() {
     this.isSubmitted = true;
     if (this.registrationForm.valid) {
-      // Call the service to register the organization
-      console.log('Registration successful', this.registrationForm.value);
-      await axios.post(`${environment.registermanagerandoperatorUrl}`, this.registrationForm.value)
-        .then((x) => {
-          console.log(x.data);
-        })
-        .catch((error) => {
-          console.error('Error registering:', error);
-        });
-    } else {
-      console.log('Form is invalid');
+      this.dataService.registermanageroperator(this.registrationForm.value).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.router.navigate(['/usersmanagement']);
+        },
+        error: (error) => {
+          console.log(error);
+         if(error.error){
+          alert('invalid form!')
+         }
+        },
+      }
+      )
     }
   }
 

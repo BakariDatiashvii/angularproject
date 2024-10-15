@@ -7,15 +7,16 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // Import HttpClientModule
 import { Observable } from 'rxjs';
-import axios from 'axios';
 import { environment } from '../environment';
+import { DataServiceService } from "../data-servise"
+
 
 @Component({
   selector: 'app-updage-register-managerandoperator',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,  
+    ReactiveFormsModule,
     DividerModule,
     ButtonModule,
     InputTextModule,
@@ -26,7 +27,7 @@ import { environment } from '../environment';
   styleUrls: ['./updage-register-managerandoperator.component.css']
 })
 export class UpdageRegisterManagerandoperatorComponent {
-  
+
   //private apiUrl = 'http://localhost:5133/api/Employee/get-user-by-id';
   //private apiUrlmanager = 'http://localhost:5133/api/Employee/get-all-stores';
 
@@ -36,25 +37,25 @@ export class UpdageRegisterManagerandoperatorComponent {
   alluser: any[] = [];
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private dataService: DataServiceService, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
     this.registrationForm = this.fb.group({
-      
+
       UserId: ['', Validators.required],
       NameEmployee: ['', Validators.required],
       LastEmployee: [''],
       Email: ['', Validators.required],
       PhoneNumber: ['', Validators.required]
-      
+
     });
   }
 
-  
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const { id } = params;
       this.userId = id;
-      
+
       console.log('Route ID:', id);
     });
 
@@ -76,17 +77,17 @@ export class UpdageRegisterManagerandoperatorComponent {
 
       UserId: userData.userId,
       // username1:userData.username,
-      Password:userData.nameEmployee,
+      Password: userData.nameEmployee,
       // CompanyName:userData.companyName,
       NameEmployee: userData.nameEmployee,
       LastEmployee: userData.lastEmployee,
       Email: userData.email,
       PhoneNumber: userData.phoneNumber
-      
+
     });
   }
 
-   async onSubmit() {
+  onSubmit() {
     // console.log(this.userId);
     //   console.log(this.registrationForm.value);
     this.isSubmitted = true;
@@ -95,20 +96,21 @@ export class UpdageRegisterManagerandoperatorComponent {
       // Call the service to register the organization
       // console.log(this.userId);
       // console.log(this.registrationForm.value);
+      this.dataService.updateuser(this.registrationForm.value).subscribe({
+        next:(x)=>{
+          console.log(x);
+          this.router.navigate(['/usersmanagement']);
+        },
+        error: (error) => {
+          console.log(error);
+         if(error.error){
+          alert('invalid form!')
+         }
+        },
+      })
 
-      let tt = this.registrationForm.value
-      console.log(tt);
-      
-      await axios.post(`${environment.updateusermanagerandoperatorUrl}`,tt).then((x)=>{
-        // this.router.navigate(['/']);
-        console.log(x.data);
-        
-      })  
-      // Perform your backend call here to save the organization
-   } else {
-      console.log('Form is invalid');
-    }
- }
+    } 
+  }
 
   getAllUsers(userId: number): Observable<any> {
     return this.http.get<any>(`${environment.getuserbyidUrl}?userId=${userId}`);

@@ -5,8 +5,10 @@ import { NgIf, CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import axios from "axios"
 import { environment } from '../environment';
+import { DataServiceService } from "../data-servise"
+
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -26,7 +28,7 @@ export class RegisterComponent {
   registrationForm: FormGroup;
   isSubmitted = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private dataService: DataServiceService,private router: Router) {
     this.registrationForm = this.fb.group({
       NameOrganization: ['', Validators.required],
       OrganizationAddress: ['', Validators.required],
@@ -39,19 +41,29 @@ export class RegisterComponent {
     });
   }
 
-  async onSubmit() {
+  onSubmit(): void {
     this.isSubmitted = true;
     if (this.registrationForm.valid) {
-      // Call the service to register the organization
-      console.log('Registration successful', this.registrationForm.value);
-      await axios.post(`${environment.registeradminbycompanyUrl}`,this.registrationForm.value).then(()=>{
-        this.router.navigate(['/']);
+      this.dataService.registercreate(this.registrationForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+         
+        },
+        error: (error) => {
+          console.log(error);
+         if(error.error){
+          alert('invalid form!')
+         }
+        },
       })
-      // Perform your backend call here to save the organization
     } else {
       console.log('Form is invalid');
     }
   }
 
   
+  
+  navigateToRegister() {
+    this.router.navigate(['/']);
+  }
 }

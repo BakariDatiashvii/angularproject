@@ -5,8 +5,9 @@ import { NgIf, CommonModule } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import axios from "axios"
 import { environment } from '../environment';
+import { DataServiceService } from "../data-servise"
+
 
 @Component({
   selector: 'app-add-store-manager',
@@ -26,7 +27,7 @@ export class AddStoreManagerComponent {
 
 
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private dataService: DataServiceService,  private router: Router) {
     
 
     let mainmanagerid 
@@ -44,20 +45,25 @@ export class AddStoreManagerComponent {
     });
   }
 
-  async onSubmit() {
+  onSubmit(): void {
     
     this.isSubmitted = true;
     if (this.registrationForm.valid) {
-      // Call the service to register the organization
-      console.log('Registration successful', this.registrationForm.value);
-      await axios.post(`${environment.addstoreapiUrl}/add-store`,this.registrationForm.value).then((x)=>{
-        // this.router.navigate(['/']);
-        console.log(x.data);
-        
+      this.dataService.registeraddstore(this.registrationForm.value).subscribe({
+        next:(x)=>{
+          console.log(x);
+      
+            this.router.navigate(['/usersmanagement']);
+         
+        },
+        error: (error) => {
+          console.log(error);
+         if(error.error){
+          alert('invalid form!')
+         }
+        },
       })
-      // Perform your backend call here to save the organization
-    } else {
-      console.log('Form is invalid');
+      
     }
   }
   onRoleChange(event: any) {

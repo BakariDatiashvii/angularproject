@@ -5,20 +5,22 @@ import { Router } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ButtonModule } from 'primeng/button';
-import axios from 'axios';
 import { tick } from '@angular/core/testing';
+import { DataServiceService } from "../data-servise"
+
 
 @Component({
   selector: 'app-users-management',
   standalone: true,
-  imports: [TableModule, TagModule, IconFieldModule, InputTextModule, InputIconModule, MultiSelectModule, DropdownModule, HttpClientModule, CommonModule,ButtonModule],
+  imports: [TableModule, TagModule, IconFieldModule, InputTextModule, InputIconModule, MultiSelectModule, DropdownModule, CommonModule,ButtonModule],
+  
   templateUrl: './users-management.component.html',
   styleUrl: './users-management.component.css',
 
@@ -43,7 +45,7 @@ export class UsersManagementComponent implements OnInit {
   ];
 
   // Inject HttpClient and Router in a single constructor
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private dataService: DataServiceService,  private router: Router) {}
 
 
 
@@ -100,12 +102,18 @@ export class UsersManagementComponent implements OnInit {
     }
   }
 
-  deletefunct(userid: number) {
-    axios.delete(`http://localhost:5133/api/Employee/delete/${userid}`).then((x) => {
-      alert(x.data);
-      this.ngOnInit();  // Refresh the data after deletion
+  deletefunct(id: number): void {
+    this.dataService.deleteuserid(id).subscribe({
+      next: (response) => {
+        alert('Delete successful:'+response);
+        this.ngOnInit();  // Refresh or reload the data after deletion
+      },
+      error: (error) => {
+        console.error('Error occurred:', error);
+      }
     });
   }
+  
 
   getAllUsers(companyId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}?CompanyId=${companyId}`);

@@ -1,9 +1,9 @@
 <div class="centerdiv">
     <div class="card padding" style="margin-bottom: 30px;">
       <div class="whitebackground">
-        <p-button [text]="true" [raised]="true" label="ავტორიზაცია" />
+        <p-button [text]="true" [raised]="true" label="ავტორიზაცია" (click)="navigateToRegister()"/>
       </div>
-      <p-button [text]="true" [raised]="true" label="რეგისტრაცია" class="marginleft" (click)="onSubmit()" />
+      <p-button [text]="true" [raised]="true" label="რეგისტრაცია" class="marginleft"  (click)="onSubmit()"/>
     </div>
   
     <div class="logincontcenter">
